@@ -1,24 +1,29 @@
 "use client"
 import usePublicAPI from '@/hooks/usePublicAPI';
-import axios from 'axios';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 import { GoSearch } from "react-icons/go";
 import catIcon from "@/assets/icon.png"
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 const CategorySection = () => {
     const [category, setCategory] = useState()
+    const [subCategory, setSubCategory] = useState([])
     const publicAPI = usePublicAPI();
     useEffect(() => {
         publicAPI.get('/category-data')
             .then(res => setCategory(res.data))
     }, [publicAPI])
 
-    useEffect(() => {
-        publicAPI.get('/category-data')
-            .then(res => setCategory(res.data))
-    }, [publicAPI])
+
+    useEffect(()=>{
+        publicAPI.get(`/sub-category-data`)
+            .then(res=> setSubCategory(res.data))
+    },[, publicAPI])
+
+    const pathName = usePathname();
+    console.log(pathName)
 
 
     return (
@@ -34,7 +39,7 @@ const CategorySection = () => {
                         category?.map(cat => (
                             <div key={cat.id} className='flex flex-col'>
                                 <Link href={`/duas/${cat.cat_name_en.replace(/\s+/g, '-').toLowerCase()}?cat=${cat.cat_id}`}>
-                                    <div className='hover:bg-[#E8F0F5] p-2 flex justify-between items-center rounded-md'>
+                                    <div className={`hover:bg-[#E8F0F5] p-2 flex justify-between items-center rounded-md ${pathName === `/duas/${cat.cat_name_en.replace(/\s+/g, '-').toLowerCase()}`? "bg-[#E8F0F5]": ""}`}>
                                         <div className='flex gap-2 items-center'>
                                             <Image src={catIcon} alt="logo" className="h-14 w-14 p-2 rounded-md bg-[#CFE0E5]"></Image>
                                             <div>
@@ -48,7 +53,18 @@ const CategorySection = () => {
                                         </div>
                                     </div>
                                 </Link>
-
+                                <div className={`${pathName === `/duas/${cat.cat_name_en.replace(/\s+/g, '-').toLowerCase()}`? "block": "hidden"}`}>
+                                    {
+                                        subCategory.filter(subCat => subCat.cat_id === cat.cat_id).map(sub =>(
+                                            <Link href={`/duas/${cat.cat_name_en.replace(/\s+/g, '-').toLowerCase()}?cat=${sub.cat_id}&subcat=${sub.subcat_id}`} key={sub.id} >
+                                            <div className='relative text-sm ml-5 p-4 border-l-2 border-l-green-700 border-dotted '>
+                                                <div className='absolute -left-1 top-5 bg-green-600 w-2 h-2 rounded-full'></div>
+                                                <h1>{sub.subcat_name_en}</h1>
+                                            </div>
+                                            </Link>
+                                        ))
+                                    }
+                                </div>
                             </div>
                         ))
                     }
