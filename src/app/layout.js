@@ -17,16 +17,13 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={inter.className}>
         <div className="h-[100vh] w-full bg-[#e6ebee] px-7 flex gap-7">
-          <div className=" h-full py-5 ">
+          <div className=" h-full py-8 ">
             <Sidebar ></Sidebar>
           </div>
 
-          <div className="flex-1 pt-5">
+          <div className="flex-1 pt-8">
             <Navbar></Navbar>
             {children}
-            
-          </div>
-          <div className="">
             
           </div>
 

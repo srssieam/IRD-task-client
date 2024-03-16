@@ -1,5 +1,5 @@
 import React from 'react';
-import { MdOutlineSearch } from "react-icons/md";
+import { GoSearch } from "react-icons/go";
 import Profile from './Profile';
 
 const Navbar = () => {
@@ -9,8 +9,8 @@ const Navbar = () => {
             <div className='w-2/5 flex justify-between items-center'>
                 <form className='relative'>
                     <input type="text" name="search" placeholder='Search by Dua Name' id="" className='text-sm w-[350px] outline-none p-4 rounded-md focus:border border-green-700 shadow-md' />
-                    <button className='absolute top-1 right-1 px-4 py-[10px] bg-[#edf0f1] rounded-md'>
-                        <MdOutlineSearch className='text-2xl text-gray-500' />
+                    <button className='absolute top-1 right-1 px-4 py-[13px] bg-[#edf0f1] rounded-md'>
+                        <GoSearch className='text-xl text-gray-500' />
                     </button>
                 </form>
                 <Profile></Profile>

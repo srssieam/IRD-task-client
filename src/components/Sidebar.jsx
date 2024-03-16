@@ -13,7 +13,7 @@ const Sidebar = () => {
     return (
         <div className="bg-white h-full flex flex-col items-center justify-between p-6 rounded-3xl font-poppins">
             <Link href="/">
-                <Image src={logo} alt="logo" className="h-14 w-14 "></Image>
+                <Image src={logo} alt="logo" className="h-12 w-12 "></Image>
             </Link>
             <div className='flex flex-col gap-5'>
                 <button className='bg-[#e6ebee] rounded-full h-11 w-11 flex justify-center items-center  1s transition hover:scale-110'>
