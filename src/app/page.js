@@ -9,7 +9,7 @@ export default function Home() {
       <CategorySection></CategorySection>
       </div>
       <div className="flex-1">
-
+        <h1 className="text-green-600 text-3xl font-semibold text-center mt-44">Select a category</h1>
       </div>
       <div className="w-1/6 rounded-3xl bg-white shadow-md overflow-hidden">
       <Setting></Setting>

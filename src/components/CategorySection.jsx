@@ -12,13 +12,14 @@ const CategorySection = () => {
     const [subCategory, setSubCategory] = useState([])
     const [duas, setDuas] = useState([])
     const [openSubCat, setOpenSubCat] = useState()
+    const [searchText, setSearchText] = useState("")
     const publicAPI = usePublicAPI();
 
     // fetch category data
     useEffect(() => {
-        publicAPI.get('/category-data')
+        publicAPI.get(`/category-data?search=${searchText}`)
             .then(res => setCategory(res.data))
-    }, [publicAPI])
+    }, [publicAPI, searchText])
 
 
     // fetch sub category data
@@ -36,6 +37,12 @@ const CategorySection = () => {
     const pathName = usePathname();
     // console.log(pathName)
 
+    // search functionality
+    const handleSearchChange = (e) => {
+        e.preventDefault()
+        // console.log(e.target.value)
+        setSearchText(e.target.value)
+    }
 
 
     return (
@@ -46,7 +53,7 @@ const CategorySection = () => {
                 {/* category searchbar */}
                 <form className='relative'>
                     <GoSearch className='absolute text-xl text-gray-500  top-4 left-4' />
-                    <input type="text" name="search" placeholder='Search Categories' id="" className='text-sm w-full outline-none border border-gray-200 pl-14 p-4 rounded-md focus:border-[3px] focus:border-green-700' />
+                    <input onChange={handleSearchChange} type="text" name="search" placeholder='Search Categories' id="" className='text-sm w-full outline-none border border-gray-200 pl-14 p-4 rounded-md focus:border-[3px] focus:border-green-700' />
                 </form>
 
                 {/* categories */}
@@ -76,9 +83,9 @@ const CategorySection = () => {
                                 <div className={`${pathName === `/duas/${cat.cat_name_en.replace(/\s+/g, '-').toLowerCase()}` ? "block ml-7 p-4 border-l-2 border-l-green-700 border-dotted space-y-5" : "hidden"}`}>
                                     {
                                         subCategory.filter(subCat => subCat.cat_id === cat.cat_id).map(sub => (
-                                            <div  key={sub.id + "sub"}>
+                                            <div key={sub.id + "sub"}>
                                                 <div className='relative text-sm '>
-                                                    <Link onClick={()=>setOpenSubCat(sub.subcat_id)} href={`/duas/${cat.cat_name_en.replace(/\s+/g, '-').toLowerCase()}?cat=${sub.cat_id}#subcat=${sub.subcat_id}`}  >
+                                                    <Link onClick={() => setOpenSubCat(sub.subcat_id)} href={`/duas/${cat.cat_name_en.replace(/\s+/g, '-').toLowerCase()}?cat=${sub.cat_id}#subcat=${sub.subcat_id}`}  >
                                                         <div className='absolute -left-5 top-1 bg-green-600 w-2 h-2 rounded-full'></div>
                                                         <h1 className='text-zinc-700 font-semibold'>{sub.subcat_name_en}</h1>
                                                     </Link>
@@ -90,7 +97,7 @@ const CategorySection = () => {
                                                         duas.filter(dua => sub.subcat_id === dua.subcat_id).map(singleDua => (
                                                             <div key={singleDua.id + "dua"} className={`ml-5 text-sm ${singleDua.subcat_id === openSubCat ? "block" : "hidden"}`}>
                                                                 <Link href={`/duas/${cat.cat_name_en.replace(/\s+/g, '-').toLowerCase()}?cat=${singleDua.cat_id}#subcat=${singleDua.subcat_id}#dua=${singleDua.dua_id}`}>
-                                                                    &gt; {singleDua.dua_name_en }
+                                                                    &gt; {singleDua.dua_name_en}
                                                                 </Link>
                                                             </div>
                                                         ))
