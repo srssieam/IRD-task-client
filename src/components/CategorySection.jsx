@@ -49,7 +49,6 @@ const CategorySection = () => {
         <div>
             <h1 className='bg-[#1FA45B] text-white p-4 text-center '>Categories</h1>
             <div className='p-3'>
-
                 {/* category searchbar */}
                 <form className='relative'>
                     <GoSearch className='absolute text-xl text-gray-500  top-4 left-4' />
@@ -57,7 +56,7 @@ const CategorySection = () => {
                 </form>
 
                 {/* categories */}
-                <div className='flex flex-col gap-2 rounded-md overflow-y-scroll max-h-[68vh] py-4'>
+                <div className='flex flex-col gap-2 rounded-md overflow-y-scroll max-h-[60vh] 5xl:max-h-[68vh] py-4'>
                     {
                         category?.map(cat => (
                             <div key={cat.id} className='flex flex-col'>

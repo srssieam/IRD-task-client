@@ -26,7 +26,7 @@ const DuaDetails = ({ params, searchParams }) => {
     }, [searchParams.cat, publicAPI])
 
     return (
-        <div className='max-h-[85vh] overflow-y-auto font-poppins'>
+        <div className=' 4xl:max-h-[85vh] overflow-y-auto font-poppins'>
 
             {
                 subCategory.map(subcat => (
@@ -41,12 +41,12 @@ const DuaDetails = ({ params, searchParams }) => {
                                             <h1>{dua.dua_id}. {dua.dua_name_en}</h1>
                                         </div>
                                         <div className='space-y-6'>
-                                            {dua.top_en && <p className='text-lg'>{dua.top_en}</p>}
-                                            {dua.dua_arabic && <p className='text-3xl text-right font-poppins leading-loose'>{dua.dua_arabic}</p>}
-                                            {dua.transliteration_en && <p className='text-lg italic'><strong>Transliteration: </strong>{dua.transliteration_en}</p>}
-                                            {dua.translation_en && <p className='text-lg text-zinc-600'><strong>Translation: </strong>{dua.translation_en}</p>}
-                                            {dua.bottom_en && <p className='text-lg'>{dua.bottom_en}</p>}
-                                            {dua.refference_en && <p className='text-lg text-zinc-700 font-semibold'><span className='text-[#1FA45B] text-xl'>Reference:</span><br />{dua.refference_en}</p>}
+                                            {dua.top_en && <p className='3xl:text-lg text-justify'>{dua.top_en}</p>}
+                                            {dua.dua_arabic && <p className='3xl:text-3xl text-right font-poppins leading-loose'>{dua.dua_arabic}</p>}
+                                            {dua.transliteration_en && <p className='3xl:text-lg italic text-justify'><strong>Transliteration: </strong>{dua.transliteration_en}</p>}
+                                            {dua.translation_en && <p className='3xl:text-lg text-zinc-600 text-justify'><strong>Translation: </strong>{dua.translation_en}</p>}
+                                            {dua.bottom_en && <p className='3xl:text-lg text-justify'>{dua.bottom_en}</p>}
+                                            {dua.refference_en && <p className='3xl:text-lg text-zinc-700 font-semibold'><span className='text-[#1FA45B] text-xl'>Reference:</span><br />{dua.refference_en}</p>}
                                         </div>
                                         <div className='flex justify-between items-center'>
                                             {

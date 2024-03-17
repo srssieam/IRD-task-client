@@ -4,6 +4,8 @@ import "./globals.css";
 import Sidebar from "@/components/Sidebar";
 import Navbar from "@/components/Navbar";
 import Setting from "@/components/Setting";
+import Bottombar from "@/components/Bottombar";
+import NavSmall from "@/components/NavSmall";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,19 +18,25 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <div className="h-[100vh] w-full bg-[#e6ebee] px-7 flex gap-7">
-          <div className=" h-full py-8 ">
+        <div className=" 4xl:h-[100vh] w-full bg-[#e6ebee] 4xl:px-7 flex gap-7">
+          <div className="hidden 3xl:block h-full py-8 ">
             <Sidebar ></Sidebar>
           </div>
-
-          <div className="flex-1 pt-8">
-            <Navbar></Navbar>
-            {children}
-            
+          <div className="3xl:hidden fixed bottom-0 w-full rounded-[50px] shadow-inner z-20">
+            <Bottombar></Bottombar>
           </div>
 
+          <div className="hidden 3xl:block flex-1 pt-8">
+            <Navbar></Navbar>
+            {children}
+          </div>
         </div>
-
+        <div className="3xl:hidden h-[full] bg-[#e6ebee] ">
+          <NavSmall></NavSmall>
+          <div className="px-6">
+            {children}
+          </div>
+        </div>
       </body>
     </html>
   );
