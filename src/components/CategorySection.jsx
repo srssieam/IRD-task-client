@@ -58,8 +58,8 @@ const CategorySection = () => {
                 {/* categories */}
                 <div className='flex flex-col gap-2 rounded-md overflow-y-scroll max-h-[60vh] 5xl:max-h-[68vh] py-4'>
                     {
-                        category?.map(cat => (
-                            <div key={cat.id} className='flex flex-col'>
+                        category?.map((cat, idx) => (
+                            <div key={idx} className='flex flex-col'>
 
                                 {/* category */}
                                 <Link href={`/duas/${cat.cat_name_en.replace(/\s+/g, '-').toLowerCase()}?cat=${cat.cat_id}`}>
@@ -81,8 +81,8 @@ const CategorySection = () => {
                                 {/* sub category */}
                                 <div className={`${pathName === `/duas/${cat.cat_name_en.replace(/\s+/g, '-').toLowerCase()}` ? "block ml-7 p-4 border-l-2 border-l-green-700 border-dotted space-y-5" : "hidden"}`}>
                                     {
-                                        subCategory.filter(subCat => subCat.cat_id === cat.cat_id).map(sub => (
-                                            <div key={sub.id + "sub"}>
+                                        subCategory.filter((subCat) => subCat.cat_id === cat.cat_id).map((sub, sidx) => (
+                                            <div key={sidx}>
                                                 <div className='relative text-sm '>
                                                     <Link onClick={() => setOpenSubCat(sub.subcat_id)} href={`/duas/${cat.cat_name_en.replace(/\s+/g, '-').toLowerCase()}?cat=${sub.cat_id}#subcat=${sub.subcat_id}`}  >
                                                         <div className='absolute -left-5 top-1 bg-green-600 w-2 h-2 rounded-full'></div>
@@ -93,8 +93,8 @@ const CategorySection = () => {
 
                                                     {/* dua */}
                                                     {
-                                                        duas.filter(dua => sub.subcat_id === dua.subcat_id).map(singleDua => (
-                                                            <div key={singleDua.id + "dua"} className={`ml-5 text-sm ${singleDua.subcat_id === openSubCat ? "block" : "hidden"}`}>
+                                                        duas.filter(dua => sub.subcat_id === dua.subcat_id).map((singleDua, didx) => (
+                                                            <div key={didx} className={`ml-5 text-sm ${singleDua.subcat_id === openSubCat ? "block" : "hidden"}`}>
                                                                 <Link href={`/duas/${cat.cat_name_en.replace(/\s+/g, '-').toLowerCase()}?cat=${singleDua.cat_id}#subcat=${singleDua.subcat_id}#dua=${singleDua.dua_id}`}>
                                                                     &gt; {singleDua.dua_name_en}
                                                                 </Link>

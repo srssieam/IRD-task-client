@@ -29,12 +29,12 @@ const DuaDetails = ({ params, searchParams }) => {
         <div className=' 4xl:max-h-[85vh] overflow-y-auto font-poppins'>
 
             {
-                subCategory.map(subcat => (
-                    <div key={subcat.id} className='flex flex-col gap-6 mb-7'>
-                        <h1 className='bg-white px-6 py-4 rounded-xl'><span className='text-[#1FA45B] font-semibold'>Section:</span>{subcat.subcat_name_en}</h1>
+                subCategory.map((subcat, idx) => (
+                    <div key={idx} className='flex flex-col gap-6 mb-7'>
+                        <h1 id={`subcat=${subcat.subcat_id}`} className='bg-white px-6 py-4 rounded-xl'><span className='text-[#1FA45B] font-semibold'>Section:</span>{subcat.subcat_name_en}</h1>
                         {
-                            duaData?.filter(findDua => findDua.subcat_id === subcat.subcat_id).map(dua => (
-                                <div id={`subcat=${dua.subcat_id}`} key={dua.id} className='flex flex-col gap-6'>
+                            duaData?.filter(findDua => findDua.subcat_id === subcat.subcat_id).map((dua, didx) => (
+                                <div key={didx}   className='flex flex-col gap-6'>
                                     <div id={`subcat=${dua.subcat_id}#dua=${dua.dua_id}`} className='bg-white px-6 py-4 rounded-xl space-y-5'>
                                         <div className='flex gap-3 items-center text-[#1FA45B] font-semibold'>
                                             <Image src={card} alt="logo" className="h-8 w-8"></Image>
@@ -48,7 +48,7 @@ const DuaDetails = ({ params, searchParams }) => {
                                             {dua.bottom_en && <p className='3xl:text-lg text-justify'>{dua.bottom_en}</p>}
                                             {dua.refference_en && <p className='3xl:text-lg text-zinc-700 font-semibold'><span className='text-[#1FA45B] text-xl'>Reference:</span><br />{dua.refference_en}</p>}
                                         </div>
-                                        <div className='flex justify-between items-center'>
+                                        <div className='flex flex-col gap-6 lg:flex-row lg:justify-between lg:items-center'>
                                             {
                                                 dua.audio ? <audio controls>
                                                     <source src={dua.audio} type="audio/mpeg" />
@@ -56,7 +56,7 @@ const DuaDetails = ({ params, searchParams }) => {
                                                 </audio> :
                                                 <div></div>
                                             }
-                                            <div className='flex gap-7'>
+                                            <div className='flex mx-auto lg:mx-0 gap-7'>
                                                 <button className='relative button'><IoCopyOutline className='text-zinc-600 text-lg' /><span className='absolute showTooltip bg-zinc-800 text-white py-1 px-2 rounded-md -top-9 -right-3 opacity-0 '>copy</span></button>
                                                 <button className='relative button'><BsBookmark className='text-zinc-600 text-lg' /><span className='absolute showTooltip bg-zinc-800 text-white py-1 px-2 rounded-md -top-9 -right-8 opacity-0 '>Bookmark</span></button>
                                                 <button className='relative button'><PiLightbulbFilament className='text-zinc-600 text-2xl' /><span className='absolute showTooltip bg-zinc-800 text-white py-1 px-2 rounded-md -top-9 -right-8 opacity-0 '>Memorize</span></button>
